@@ -1,6 +1,7 @@
 // app/[gender]/page.jsx
 import { products } from "@/data/products";
 import { GenderPageClient } from "@/components/GenderPageClient";
+import { FilterProvider } from "@/context/FilterContext";
 
 export default async function GenderPage({ params }) {
   const { gender } = await params;
@@ -15,5 +16,9 @@ export default async function GenderPage({ params }) {
     );
   }
 
-  return <GenderPageClient gender={gender} products={genderProducts} />;
+  return (
+    <FilterProvider>
+      <GenderPageClient gender={gender} products={genderProducts} />;
+    </FilterProvider>
+  );
 }

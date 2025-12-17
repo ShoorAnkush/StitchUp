@@ -8,15 +8,13 @@ import { Toaster } from "react-hot-toast";
 
 export function Providers({ children }) {
   return (
-    <FilterProvider>
-      <AuthProvider>
-        <CartProvider>
-          <WishlistProvider>
-            {children}
-            <Toaster />
-          </WishlistProvider>
-        </CartProvider>
-      </AuthProvider>
-    </FilterProvider>
+    <AuthProvider>
+      <CartProvider>
+        <WishlistProvider>
+          {children}
+          <Toaster />
+        </WishlistProvider>
+      </CartProvider>
+    </AuthProvider>
   );
 }

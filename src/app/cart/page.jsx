@@ -8,10 +8,12 @@ import { useRouter } from "next/navigation";
 import { FaLongArrowAltLeft } from "react-icons/fa";
 import { useCart } from "@/context/CartContext";
 
-export default function CartPage() {
+export default function CartPage({ product }) {
   const { cartItems = [], removeFromCart, updateQuantity } = useCart();
   const router = useRouter();
 
+  const colors = Array.isArray(product?.colors) ? product.colors : [];
+  const sizes = Array.isArray(product?.sizes) ? product.sizes : [];
   // normalize numbers just in case
   const norm = (v) => (typeof v === "string" ? Number(v) : v);
 
@@ -120,13 +122,28 @@ export default function CartPage() {
                   {product.color && (
                     <div className="mt-1">
                       <span className="text-gray-500 text-sm">
-                        Color:{" "}
+                        Color:
                         <span className="text-gray-800 font-medium capitalize">
                           {product.color}
                         </span>
                       </span>
                     </div>
                   )}
+
+                  {/* Color */}
+                  <div className="mt-3 flex items-center gap-2">
+                    <span className="text-gray-500 text-sm">Color:</span>
+                    <select
+                      className="border border-gray-300 rounded px-2 py-1 text-sm outline-none"
+                      value={product.quantity}
+                    >
+                      {colors.map((q) => (
+                        <option key={q} value={q}>
+                          {q}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
 
                   {/* Quantity */}
                   <div className="mt-3 flex items-center gap-2">

@@ -117,7 +117,7 @@ export default function ProductDetailClient({ product }) {
             </ul>
             {selectedColor && (
               <p className="text-sm text-gray-600 mt-2 capitalize">
-                Selected: <b>{selectedColor}</b>
+                Color: <b>{selectedColor}</b>
               </p>
             )}
           </div>
@@ -153,7 +153,7 @@ export default function ProductDetailClient({ product }) {
             </ul>
             {selectedSize && (
               <p className="text-sm text-gray-600 mt-2">
-                Selected: <b>{selectedSize}</b>
+                Size: <b>{selectedSize}</b>
               </p>
             )}
           </div>

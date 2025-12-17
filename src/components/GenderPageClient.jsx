@@ -5,7 +5,7 @@ import Link from "next/link";
 import { IoIosArrowDown } from "react-icons/io";
 
 import { ProductCard } from "@/components/ProductCard";
-import { FilterSidebar } from "@/components/FilterSidebar"; // your updated FilterComponent
+import { FilterSidebar } from "@/components/FilterSidebar";
 import { useFilter } from "@/context/FilterContext";
 
 const sortOptions = ["Default", "Low to High", "High to Low", "A to Z"];
