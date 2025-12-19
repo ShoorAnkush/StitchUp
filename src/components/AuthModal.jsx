@@ -45,7 +45,6 @@ export const AuthModal = ({ onClose }) => {
 
         await sendEmailVerification(userCredential.user);
         await updateProfile(userCredential.user, { displayName: name });
-        await signOut(auth);
 
         await setDoc(
           doc(db, "users", userCredential.user.uid),
@@ -63,7 +62,7 @@ export const AuthModal = ({ onClose }) => {
           },
           { merge: true }
         );
-
+        await signOut(auth);
         toast.success("Account created! Please log in.");
       }
 
@@ -152,7 +151,7 @@ export const AuthModal = ({ onClose }) => {
           <button
             type="button"
             onClick={() => setIsLogin(!isLogin)}
-            className="text-white font-medium hover:underline"
+            className="text-white font-medium hover:underline cursor-pointer"
           >
             {isLogin ? "Sign Up" : "Login"}
           </button>

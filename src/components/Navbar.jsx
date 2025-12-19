@@ -23,11 +23,10 @@ export const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   const router = useRouter();
+  const pathname = usePathname();
 
   const [showAuth, setShowAuth] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
-
-  const pathname = usePathname();
 
   const isActive = (href) =>
     pathname === href || pathname.startsWith(href + "/");
@@ -39,6 +38,7 @@ export const Navbar = () => {
           {/* Left Section */}
           <div className="flex items-center gap-4 md:gap-16 text-black">
             <SidebarMenu />
+
             <div className="hidden md:flex text-lg gap-8 font-semibold tracking-wide">
               <Link
                 href="/men"
@@ -49,7 +49,7 @@ export const Navbar = () => {
                 }`}
               >
                 MEN
-                <span className="absolute left-0 -bottom-1 h-0.5 w-0 bg-black group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute left-0 -bottom-1 h-0.5 w-0 bg-black group-hover:w-full transition-all duration-300" />
               </Link>
 
               <Link
@@ -66,7 +66,7 @@ export const Navbar = () => {
             </div>
           </div>
 
-          {/* Center Logo */}
+          {/* Center Logo (UNCHANGED) */}
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition">
             <Link href="/">
               <div className="h-26 md:h-42 w-auto">
@@ -83,7 +83,7 @@ export const Navbar = () => {
 
           {/* Right Icons */}
           <div className="flex items-center gap-4 text-2xl relative z-20">
-            {/* Search Box */}
+            {/* Desktop Search (UNCHANGED) */}
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -100,53 +100,66 @@ export const Navbar = () => {
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
               <button type="submit">
-                <GoSearch
-                  size={20}
-                  className="cursor-pointer text-gray-600 hover:text-black transition"
-                />
+                <GoSearch className="text-[18px] md:text-[20px] text-gray-600 hover:text-black transition" />
               </button>
             </form>
 
+            {/* Mobile Search Icon (NEW) */}
+            <button
+              onClick={() => router.push("/search")}
+              className="lg:hidden w-12 flex flex-col items-center justify-center
+                         text-gray-600 hover:text-black transition"
+            >
+              <GoSearch className="text-[18px]" />
+              <span className="text-[11px] font-bold leading-none mt-1">
+                Search
+              </span>
+            </button>
+
             {/* Profile */}
             {user ? (
-              <div className="relative w-12 flex flex-col items-center justify-center">
+              <div className="dropdown dropdown-end relative w-12 flex flex-col items-center justify-center">
                 <Image
+                  tabIndex={0}
+                  role="button"
                   src={`https://ui-avatars.com/api/?name=${encodeURIComponent(
                     user.displayName || user.email[0]
                   )}&background=0D8ABC&color=fff`}
                   alt={user.displayName || "User avatar"}
-                  width={32}
-                  height={32}
-                  onClick={() => setProfileOpen((prev) => !prev)}
-                  className="w-8 h-8 rounded-full cursor-pointer hover:ring-2 hover:ring-blue-400 transition"
+                  width={600}
+                  height={600}
+                  className="w-7 h-7 md:w-8 md:h-8 rounded-full cursor-pointer hover:ring-2 hover:ring-blue-400 transition"
                 />
 
-                {profileOpen && (
-                  <div className="absolute right-0 mt-3 bg-white rounded-2xl shadow-xl p-4 min-w-[180px] text-gray-700">
-                    <p className="font-semibold text-sm mb-2">
-                      Hello, {user.displayName}
-                    </p>
-                    <hr className="mb-2" />
-                    <button
-                      onClick={logout}
-                      className="text-xl text-left hover:text-red-600 transition"
-                    >
-                      Logout
-                    </button>
-                  </div>
-                )}
+                <div
+                  tabIndex={-1}
+                  className="dropdown-content absolute right-2 top-10 bg-white rounded-2xl shadow-xl p-4 min-w-38 text-gray-700 z-50"
+                >
+                  <p className="font-semibold text-sm mb-2">
+                    Hello, {user.displayName}
+                  </p>
+
+                  <hr className="mb-2" />
+
+                  <button
+                    onClick={logout}
+                    className="text-base font-semibold text-left hover:scale-110 transition w-full cursor-pointer"
+                  >
+                    Logout
+                  </button>
+                </div>
               </div>
             ) : (
-              <div className="w-12 flex flex-col items-center justify-center text-black cursor-pointer">
-                <FiUser
-                  size={20}
-                  onClick={() => setShowAuth(true)}
-                  className="text-gray-600 hover:text-black transition"
-                />
+              <button
+                onClick={() => setShowAuth(true)}
+                className="group w-12 flex flex-col items-center justify-center cursor-pointer
+                           text-gray-600 hover:text-black transition"
+              >
+                <FiUser className="text-[18px] md:text-[20px]" />
                 <span className="text-[11px] font-bold leading-none mt-1">
                   Profile
                 </span>
-              </div>
+              </button>
             )}
 
             {showAuth && <AuthModal onClose={() => setShowAuth(false)} />}
@@ -154,13 +167,10 @@ export const Navbar = () => {
             {/* Wishlist */}
             <Link
               href="/wishlist"
-              className="relative w-12 flex flex-col items-center justify-center text-black"
+              className="group relative w-12 flex flex-col items-center justify-center cursor-pointer
+                         text-gray-600 hover:text-black transition"
             >
-              <IoMdHeartEmpty
-                size={20}
-                className="cursor-pointer text-gray-600 hover:text-black transition"
-              />
-
+              <IoMdHeartEmpty className="text-[18px] md:text-[20px]" />
               <span className="text-[11px] font-bold leading-none mt-1">
                 Wishlist
               </span>
@@ -175,13 +185,10 @@ export const Navbar = () => {
             {/* Cart */}
             <Link
               href="/cart"
-              className="relative w-12 flex flex-col items-center justify-center text-black"
+              className="group relative w-12 flex flex-col items-center justify-center cursor-pointer
+                         text-gray-600 hover:text-black transition"
             >
-              <IoBagHandleOutline
-                size={20}
-                className="cursor-pointer text-gray-600 hover:text-black transition"
-              />
-
+              <IoBagHandleOutline className="text-[18px] md:text-[20px]" />
               <span className="text-[11px] font-bold leading-none mt-1">
                 Cart
               </span>

@@ -12,7 +12,12 @@ export function Providers({ children }) {
       <CartProvider>
         <WishlistProvider>
           {children}
-          <Toaster />
+          <Toaster
+            position="bottom-right"
+            toastOptions={{
+              duration: 4000,
+            }}
+          />
         </WishlistProvider>
       </CartProvider>
     </AuthProvider>

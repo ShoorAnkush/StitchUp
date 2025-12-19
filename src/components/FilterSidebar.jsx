@@ -36,11 +36,19 @@ export const FilterSidebar = ({ gender }) => {
   }, [genderProducts]);
 
   return (
-    <div className="overflow-auto max-h-[90vh] p-4 space-y-6 text-black">
+    <div
+      className="
+    overflow-auto max-h-[90dvh]
+    p-5 md:p-4
+    space-y-8 md:space-y-6
+    text-black
+  "
+    >
+      {" "}
       {/* Reset Filter Button */}
       <div className="my-4">
         <button
-          className="btn btn-wide btn-active hover:btn-accent"
+          className="btn btn-wide btn-active hover:bg-gray-300"
           onClick={toggleReset}
         >
           Reset
@@ -66,7 +74,6 @@ export const FilterSidebar = ({ gender }) => {
           ))}
         </ul>
       </div>
-
       {/* Size Filter */}
       <div>
         <h2 className="text-lg font-semibold mb-3">Size</h2>
@@ -94,7 +101,6 @@ export const FilterSidebar = ({ gender }) => {
           ))}
         </ul>
       </div>
-
       {/* Price Filter (placeholder) */}
       <fieldset className="mb-3">
         <legend className="text-lg font-semibold">Price Range</legend>

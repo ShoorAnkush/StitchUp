@@ -18,7 +18,7 @@ export default async function GenderPage({ params }) {
 
   return (
     <FilterProvider>
-      <GenderPageClient gender={gender} products={genderProducts} />;
+      <GenderPageClient gender={gender} products={genderProducts} />
     </FilterProvider>
   );
 }

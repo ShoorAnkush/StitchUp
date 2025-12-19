@@ -1,7 +1,7 @@
 // app/cart/page.jsx  (or pages/cart.jsx) — client component
 "use client";
 
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -10,6 +10,9 @@ import { useCart } from "@/context/CartContext";
 
 export default function CartPage({ product }) {
   const { cartItems = [], removeFromCart, updateQuantity } = useCart();
+  const [selectedColor, setSelectedColor] = useState("");
+  const [selectedSize, setSelectedSize] = useState("");
+
   const router = useRouter();
 
   const colors = Array.isArray(product?.colors) ? product.colors : [];
@@ -48,6 +51,20 @@ export default function CartPage({ product }) {
       </div>
     );
 
+  const handleCheckout = async () => {
+    const res = await fetch("/api/checkout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ cartItems }),
+    });
+
+    const data = await res.json();
+
+    if (data.url) {
+      window.location.href = data.url;
+    }
+  };
+
   return (
     <div className="flex flex-col md:flex-row justify-between py-16 max-w-6xl w-full px-6 mx-auto gap-10 text-black">
       {/* Cart Items */}
@@ -80,6 +97,9 @@ export default function CartPage({ product }) {
               ? product.images
               : "/images/placeholder.png";
 
+          const colors = Array.isArray(product?.colors) ? product.colors : [];
+          const sizes = Array.isArray(product?.sizes) ? product.sizes : [];
+
           return (
             <div
               key={key}
@@ -106,44 +126,55 @@ export default function CartPage({ product }) {
                   <p className="font-semibold text-gray-800 mb-1">
                     {product.name}
                   </p>
-                  <p className="text-gray-500 text-sm">${product.price}</p>
+                  <p className="text-gray-800 text-sm">${product.price}</p>
 
-                  {/* Size */}
-                  <div className="mt-2">
-                    <span className="text-gray-500 text-sm">
-                      Size:{" "}
-                      <span className="text-gray-800 font-medium">
-                        {product.size ?? "N/A"}
-                      </span>
-                    </span>
-                  </div>
+                  {/* Sizes */}
+                  {sizes.length > 0 && (
+                    <div className="mt-3 flex items-center gap-2">
+                      <span className="text-gray-500 text-sm">Size:</span>
 
-                  {/* Color */}
-                  {product.color && (
-                    <div className="mt-1">
-                      <span className="text-gray-500 text-sm">
-                        Color:
-                        <span className="text-gray-800 font-medium capitalize">
-                          {product.color}
-                        </span>
-                      </span>
+                      <select
+                        className="border border-gray-300 rounded px-2 py-1 text-sm 
+                 text-gray-800 font-medium capitalize outline-none"
+                        value={selectedSize}
+                        onChange={(e) => setSelectedSize(e.target.value)}
+                      >
+                        <option value="" disabled>
+                          {product.size}
+                        </option>
+
+                        {sizes.map((size) => (
+                          <option key={size} value={size}>
+                            {size}
+                          </option>
+                        ))}
+                      </select>
                     </div>
                   )}
 
                   {/* Color */}
-                  <div className="mt-3 flex items-center gap-2">
-                    <span className="text-gray-500 text-sm">Color:</span>
-                    <select
-                      className="border border-gray-300 rounded px-2 py-1 text-sm outline-none"
-                      value={product.quantity}
-                    >
-                      {colors.map((q) => (
-                        <option key={q} value={q}>
-                          {q}
+                  {colors.length > 0 && (
+                    <div className="mt-3 flex items-center gap-2">
+                      <span className="text-gray-500 text-sm">Color:</span>
+
+                      <select
+                        className="border border-gray-300 rounded px-2 py-1 text-sm 
+                 text-gray-800 font-medium capitalize outline-none"
+                        value={selectedColor}
+                        onChange={(e) => setSelectedColor(e.target.value)}
+                      >
+                        <option value="" disabled>
+                          {product.color}
                         </option>
-                      ))}
-                    </select>
-                  </div>
+
+                        {colors.map((color) => (
+                          <option key={color} value={color}>
+                            {color}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  )}
 
                   {/* Quantity */}
                   <div className="mt-3 flex items-center gap-2">
@@ -275,8 +306,8 @@ export default function CartPage({ product }) {
 
         {/* NOTE: keep your existing checkout handler or wire this button */}
         <button
-          onClick={() => alert("Proceed to checkout (wire up your handler)")}
-          className="w-full py-3 mt-6 bg-black/70 text-white rounded-lg font-semibold hover:bg-black/90 active:scale-[0.98] transition"
+          onClick={handleCheckout}
+          className="w-full py-3 mt-6 bg-gray-700 text-white rounded-lg font-semibold hover:bg-gray-800 active:scale-[0.98] transition cursor-pointer"
         >
           Proceed to Checkout
         </button>
