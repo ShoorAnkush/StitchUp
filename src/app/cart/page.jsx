@@ -38,15 +38,20 @@ export default function CartPage({ product }) {
 
   if (!Array.isArray(cartItems) || cartItems.length === 0)
     return (
-      <div className="flex flex-col items-center justify-center py-24">
-        <p className="text-3xl text-gray-500 text-center">
-          Your cart is empty.
+      <div className="flex flex-col items-center justify-center text-center py-28 px-4">
+        <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 tracking-wide">
+          Your cart is empty
+        </h2>
+
+        <p className="text-gray-500 mt-3 max-w-md">
+          Start shopping to fill it up.
         </p>
+
         <Link
           href="/men"
-          className="mt-6 px-6 py-3 bg-gray-800 text-white rounded-lg font-semibold hover:bg-gray-900 active:scale-95 transition"
+          className="mt-8 inline-flex items-center justify-center rounded-full bg-gray-900 px-8 py-3 text-sm font-medium text-white hover:bg-gray-800 active:scale-95 transition"
         >
-          Browse Products
+          Browse products
         </Link>
       </div>
     );

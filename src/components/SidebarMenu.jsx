@@ -16,12 +16,10 @@ export const SidebarMenu = () => {
 
   return (
     <>
-      {/* Hamburger Button (controlled by state) */}
       <div className="z-100 relative">
         <Hamburger toggled={isOpen} toggle={setIsOpen} size={28} />
       </div>
 
-      {/* AnimatePresence handles mounting/unmounting with animation */}
       <AnimatePresence>
         {isOpen && (
           <>

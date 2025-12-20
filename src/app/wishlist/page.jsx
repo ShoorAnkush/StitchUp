@@ -7,6 +7,7 @@ import { ProductCard } from "@/components/ProductCard"; // adjust alias/path if 
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
 import { products } from "@/data/products"; // keep your local products list
+import Link from "next/link";
 
 export default function WishlistPage() {
   const { wishlistItems = [] } = useWishlist();
@@ -35,11 +36,23 @@ export default function WishlistPage() {
   };
 
   return (
-    <div className="p-6">
+    <div className="p-6 h-9/10">
       {!Array.isArray(wishlistItems) || wishlistItems.length === 0 ? (
-        <div className="text-center py-20">
-          <p className="text-3xl text-gray-500 uppercase">Wishlist is empty.</p>
-          <p className="text-gray-500 mt-4 uppercase">Start adding products</p>
+        <div className="flex flex-col items-center justify-center text-center py-24 px-4">
+          <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 tracking-wide">
+            Your wishlist is empty
+          </h2>
+
+          <p className="text-gray-500 mt-3 max-w-md">
+            Save items you love and come back to them anytime.
+          </p>
+
+          <Link
+            href="/men"
+            className="mt-8 inline-flex items-center justify-center rounded-full bg-gray-800 px-8 py-3 text-sm font-medium text-white hover:bg-gray-900 transition"
+          >
+            Browse products
+          </Link>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 p-6 justify-items-center">

@@ -16,6 +16,8 @@ import { SidebarMenu } from "@/components/SidebarMenu";
 import { AuthModal } from "@/components/AuthModal";
 import { useState } from "react";
 
+import { useTypewriterPlaceholder } from "@/hooks/useTypewriterPlaceholder";
+
 export const Navbar = () => {
   const { cartItems } = useCart();
   const { wishlistItems } = useWishlist();
@@ -30,6 +32,10 @@ export const Navbar = () => {
 
   const isActive = (href) =>
     pathname === href || pathname.startsWith(href + "/");
+
+  const placeholders = ["Hoodies", "Sneakers", "Jackets", "Accessories"];
+
+  const placeholder = useTypewriterPlaceholder(placeholders);
 
   return (
     <div className="top-0 sticky z-50">
@@ -66,10 +72,10 @@ export const Navbar = () => {
             </div>
           </div>
 
-          {/* Center Logo (UNCHANGED) */}
+          {/* Center Logo */}
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition">
             <Link href="/">
-              <div className="h-26 md:h-42 w-auto">
+              <div className="h-22 md:h-36 w-auto">
                 <Image
                   src="/images/logo.png"
                   alt="StitchUp Logo"
@@ -83,7 +89,7 @@ export const Navbar = () => {
 
           {/* Right Icons */}
           <div className="flex items-center gap-4 text-2xl relative z-20">
-            {/* Desktop Search (UNCHANGED) */}
+            {/* Desktop Search */}
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -94,7 +100,7 @@ export const Navbar = () => {
             >
               <input
                 type="text"
-                placeholder="Find products..."
+                placeholder={`Search ${placeholder}`}
                 className="w-full outline-none placeholder-gray-400 text-gray-700 text-sm bg-transparent"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}

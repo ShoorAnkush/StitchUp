@@ -26,20 +26,21 @@ body {
   color: var(--foreground);
 }
 
-/* Reset scrollbars (override DaisyUI) */
-::-webkit-scrollbar {
-  width: 8px;
+/* Sidebar scrollbar ONLY */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: oklch(var(--s)) oklch(var(--p)) !important;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; /* light track */
+  background: oklch(var(--p));
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #c5c5c5; /* light thumb */
-  border-radius: 9999px;
+  background-color: oklch(var(--s));
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #a3a3a3;
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  color: #000000 !important;
 }

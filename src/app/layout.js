@@ -28,11 +28,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
       >
         <Providers>
           <Navbar />
-          {children}
+          <main className="flex-1">{children}</main>
           <Footer />
         </Providers>
       </body>
