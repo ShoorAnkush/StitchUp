@@ -6,10 +6,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FaLongArrowAltLeft } from "react-icons/fa";
+import { RxCrossCircled } from "react-icons/rx";
 import { useCart } from "@/context/CartContext";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { useWishlist } from "@/context/WishlistContext";
 
 export default function CartPage({ product }) {
   const { cartItems = [], removeFromCart, updateQuantity } = useCart();
+  const { toggleWishlistButton, isInWishlist } = useWishlist();
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
 
@@ -105,6 +109,8 @@ export default function CartPage({ product }) {
           const colors = Array.isArray(product?.colors) ? product.colors : [];
           const sizes = Array.isArray(product?.sizes) ? product.sizes : [];
 
+          const alreadyInWishlist = isInWishlist(product.id);
+
           return (
             <div
               key={key}
@@ -119,8 +125,8 @@ export default function CartPage({ product }) {
                   <Image
                     src={imgSrc}
                     alt={product.name}
-                    width={96}
-                    height={96}
+                    width={500}
+                    height={500}
                     className="w-full h-full object-cover"
                     quality={85}
                     priority={false}
@@ -217,24 +223,42 @@ export default function CartPage({ product }) {
                   onClick={() =>
                     removeFromCart(product.id, product.size, product.color)
                   }
-                  className="p-2 hover:bg-red-100 rounded transition"
+                  className="p-2 hover:bg-red-200 rounded transition cursor-pointer"
                   aria-label="Remove item"
                 >
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 20 20"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="m12.5 7.5-5 5m0-5 5 5m5.833-2.5a8.333 8.333 0 1 1-16.667 0 8.333 8.333 0 0 1 16.667 0"
-                      stroke="#FF532E"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
+                  <RxCrossCircled size={22} color="red" />
+                </button>
+
+                <button
+                  onClick={() => {
+                    if (alreadyInWishlist) return;
+                    if (alreadyInWishlist) {
+                      toast.error("Already in wishlist");
+                    }
+
+                    toggleWishlistButton(Number(product.id)); // add to wishlist
+                    removeFromCart(product.id, product.size, product.color);
+                  }}
+                  title={
+                    alreadyInWishlist
+                      ? "Already in wishlist"
+                      : "Move to wishlist"
+                  }
+                  disabled={alreadyInWishlist}
+                  className={`p-2 rounded transition
+    ${
+      alreadyInWishlist
+        ? "cursor-not-allowed opacity-50"
+        : "hover:bg-gray-200 cursor-pointer"
+    }
+  `}
+                  aria-label="Move item to wishlist"
+                >
+                  {alreadyInWishlist ? (
+                    <AiFillHeart size={22} />
+                  ) : (
+                    <AiOutlineHeart size={22} />
+                  )}
                 </button>
               </div>
             </div>

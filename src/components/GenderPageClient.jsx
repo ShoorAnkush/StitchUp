@@ -68,7 +68,7 @@ export function GenderPageClient({ gender, products }) {
       </div>
 
       {/* Right side */}
-      <div className="flex flex-col flex-1">
+      <div className="flex flex-col flex-1 mb-8">
         {/* Sort dropdown */}
         <div className="hidden md:flex justify-end mr-4 mt-2">
           <div className="dropdown dropdown-end text-black">

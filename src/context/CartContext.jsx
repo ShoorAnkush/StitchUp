@@ -48,17 +48,14 @@ export function CartProvider({ children }) {
           const snap = await getDocs(cartRef);
           const serverCart = snap.docs.map((d) => d.data());
 
-          // Merge server + local (server wins for identical keys; uses deterministic key)
           const map = new Map();
           [...serverCart, ...localCart].forEach((item) => {
             map.set(makeKey(item), item);
           });
 
           mergedCart = Array.from(map.values());
-
-          // Persist mergedCart to server (overwrite strategy: clear subcollection, write merged)
-          // We do this so server and client are consistent.
           const batch = writeBatch(db);
+
           // delete existing server docs
           snap.docs.forEach((d) => batch.delete(d.ref));
           // write merged docs with deterministic ids
@@ -133,17 +130,21 @@ export function CartProvider({ children }) {
       try {
         await saveCartToServer(updatedCart);
       } catch (err) {
-        // give actionable error message
         console.error("saveCart failed", err);
-        toast.error("Failed to save cart. Check console/network.");
+        // toast.error("Failed to save cart. Check console/network.");
       }
     } else if (typeof window !== "undefined") {
       localStorage.setItem("cart", JSON.stringify(updatedCart));
     }
   };
 
-  const toggleCartItems = (product, selectedSize, selectedColor) => {
-    if (!selectedSize) {
+  const toggleCartItems = (
+    product,
+    selectedSize,
+    selectedColor,
+    quantity = 1
+  ) => {
+    if (product.sizes?.length > 0 && !selectedSize) {
       toast.error("Please select a size");
       return;
     }
@@ -175,7 +176,7 @@ export function CartProvider({ children }) {
     } else {
       updatedCart = [
         ...cartItems,
-        { ...product, size: selectedSize, color: selectedColor, quantity: 1 },
+        { ...product, size: selectedSize, color: selectedColor, quantity },
       ];
       toast.success("Added to Cart");
     }

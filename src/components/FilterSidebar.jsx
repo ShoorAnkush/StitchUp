@@ -48,7 +48,7 @@ export const FilterSidebar = ({ gender }) => {
       {/* Reset Filter Button */}
       <div className="my-4">
         <button
-          className="btn btn-wide btn-active hover:bg-gray-300"
+          className="btn btn-wide btn-active bg-[#ebe7e7] hover:bg-gray-300"
           onClick={toggleReset}
         >
           Reset

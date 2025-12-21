@@ -7,6 +7,7 @@ export const ProductDetailFooter = ({
   product,
   selectedColor,
   selectedSize,
+  quantity,
 }) => {
   const { toggleCartItems, isInCart } = useCart();
   const { toggleWishlistButton, isInWishlist } = useWishlist();
@@ -27,7 +28,7 @@ export const ProductDetailFooter = ({
 
       <button
         onClick={() => {
-          toggleCartItems(product, selectedSize, selectedColor);
+          toggleCartItems(product, selectedSize, selectedColor, quantity);
         }}
         className="flex-1 bg-gray-800 text-white font-semibold py-2 rounded-lg 
                    hover:bg-gray-900 hover:scale-95 transition cursor-pointer shadow-xl/20"

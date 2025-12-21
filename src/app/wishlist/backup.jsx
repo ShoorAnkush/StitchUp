@@ -1,30 +1,18 @@
 // app/wishlist/page.jsx  (client)
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { useRouter } from "next/navigation"; // Next.js navigation
 import { ProductCard } from "@/components/ProductCard"; // adjust alias/path if needed
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
 import { products } from "@/data/products"; // keep your local products list
 import Link from "next/link";
-import { WishlistModal } from "@/components/WishlistModal";
 
 export default function WishlistPage() {
-  const { wishlistItems = [], removeFromWishlist } = useWishlist();
-  const { toggleCartItems, isInCart, flag } = useCart();
+  const { wishlistItems = [] } = useWishlist();
+  const { toggleCartItems, isInCart } = useCart();
   const router = useRouter();
-  const [showModal, setShowModal] = useState(false);
-  const [modalProduct, setModalProduct] = useState(null);
-
-  const hasVariants = (product) => {
-    const hasSizes = Array.isArray(product.sizes) && product.sizes.length > 0;
-
-    const hasColors =
-      Array.isArray(product.colors) && product.colors.length > 0;
-
-    return hasSizes || hasColors;
-  };
 
   // Defensive normalized ID helper
   const normalize = (v) => {
@@ -47,19 +35,8 @@ export default function WishlistPage() {
     router.push(`/product/${normalize(id)}`);
   };
 
-  const clicked = (id) => {
-    setModalId(id);
-  };
-
   return (
     <div className="p-6 h-9/10">
-      {showModal && modalProduct && (
-        <WishlistModal
-          product={modalProduct}
-          onClose={() => setShowModal(false)}
-        />
-      )}
-
       {!Array.isArray(wishlistItems) || wishlistItems.length === 0 ? (
         <div className="flex flex-col items-center justify-center text-center py-24 px-4">
           <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 tracking-wide">
@@ -100,20 +77,11 @@ export default function WishlistPage() {
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
-
-                      if (hasVariants(product)) {
-                        setModalProduct(product);
-                        setShowModal(true);
-                      } else {
-                        toggleCartItems(product);
-                        removeFromWishlist(product.id);
-                      }
+                      toggleCartItems(product.id);
                     }}
                     className="mt-2 px-3 bg-gray-800 text-white font-semibold py-2 rounded-lg hover:bg-gray-900 active:scale-95 transition cursor-pointer"
                   >
-                    {hasVariants(product)
-                      ? "🛒 Move to Cart"
-                      : "🛒 Add to Cart"}
+                    🛒 Move to Cart
                   </button>
                 </div>
               );

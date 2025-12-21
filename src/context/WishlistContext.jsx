@@ -21,7 +21,7 @@ export const WishlistProvider = ({ children }) => {
   const [isWishlistLoaded, setIsWishlistLoaded] = useState(false);
   const { user } = useAuth();
 
-  // 🔹 Load wishlist when user changes
+  // Load wishlist when user changes
   useEffect(() => {
     let active = true;
 
@@ -72,7 +72,7 @@ export const WishlistProvider = ({ children }) => {
     };
   }, [user]);
 
-  // 🔹 Sync with Firestore or localStorage
+  // Sync with Firestore or localStorage
   useEffect(() => {
     if (!isWishlistLoaded) return;
     const saveWishlist = async () => {
@@ -102,7 +102,7 @@ export const WishlistProvider = ({ children }) => {
     saveWishlist();
   }, [wishlistItems, user, isWishlistLoaded]);
 
-  // 🔹 Add or remove item
+  // Add or remove item
   const toggleWishlistButton = async (productId) => {
     if (wishlistItems.includes(productId)) {
       await removeFromWishlist(productId);

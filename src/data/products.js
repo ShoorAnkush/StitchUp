@@ -8,6 +8,8 @@ export const products = [
     gender: "men",
     images: [
       "https://images.pexels.com/photos/1666779/pexels-photo-1666779.jpeg",
+      "https://images.pexels.com/photos/1666779/pexels-photo-1666779.jpeg",
+      "https://images.pexels.com/photos/1666779/pexels-photo-1666779.jpeg",
     ],
     description:
       "Premium cotton hoodie with Nike logo. Perfect for casual wear.",
@@ -26,6 +28,8 @@ export const products = [
     price: 120,
     gender: "men",
     images: [
+      "https://images.pexels.com/photos/826380/pexels-photo-826380.jpeg",
+      "https://images.pexels.com/photos/826380/pexels-photo-826380.jpeg",
       "https://images.pexels.com/photos/826380/pexels-photo-826380.jpeg",
     ],
     description:
@@ -46,6 +50,8 @@ export const products = [
     gender: "women",
     images: [
       "https://images.pexels.com/photos/20448164/pexels-photo-20448164.jpeg",
+      "https://images.pexels.com/photos/20448164/pexels-photo-20448164.jpeg",
+      "https://images.pexels.com/photos/20448164/pexels-photo-20448164.jpeg",
     ],
     description: "Lightweight floral dress perfect for summer outings.",
     sizes: ["S", "M", "L"],
@@ -63,6 +69,8 @@ export const products = [
     price: 45,
     gender: "men",
     images: [
+      "https://images.pexels.com/photos/1598507/pexels-photo-1598507.jpeg",
+      "https://images.pexels.com/photos/1598507/pexels-photo-1598507.jpeg",
       "https://images.pexels.com/photos/1598507/pexels-photo-1598507.jpeg",
     ],
     description: "Classic straight-fit denim jeans. Durable and stylish.",
@@ -82,6 +90,8 @@ export const products = [
     gender: "men",
     images: [
       "https://images.pexels.com/photos/1040945/pexels-photo-1040945.jpeg",
+      "https://images.pexels.com/photos/1040945/pexels-photo-1040945.jpeg",
+      "https://images.pexels.com/photos/1040945/pexels-photo-1040945.jpeg",
     ],
     description: "Traditional cotton kurta for festive occasions.",
     sizes: ["M", "L", "XL"],
@@ -99,6 +109,8 @@ export const products = [
     price: 35,
     gender: "women",
     images: [
+      "https://images.pexels.com/photos/1007018/pexels-photo-1007018.jpeg",
+      "https://images.pexels.com/photos/1007018/pexels-photo-1007018.jpeg",
       "https://images.pexels.com/photos/1007018/pexels-photo-1007018.jpeg",
     ],
     description: "Elegant ankle-length skirt with a flared design.",
@@ -118,6 +130,8 @@ export const products = [
     gender: "men",
     images: [
       "https://images.pexels.com/photos/7199596/pexels-photo-7199596.jpeg",
+      "https://images.pexels.com/photos/7199596/pexels-photo-7199596.jpeg",
+      "https://images.pexels.com/photos/7199596/pexels-photo-7199596.jpeg",
     ],
     description: "Comfortable joggers for gym and casual outings.",
     sizes: ["M", "L", "XL"],
@@ -135,6 +149,8 @@ export const products = [
     price: 50,
     gender: "men",
     images: [
+      "https://images.pexels.com/photos/5103042/pexels-photo-5103042.jpeg",
+      "https://images.pexels.com/photos/5103042/pexels-photo-5103042.jpeg",
       "https://images.pexels.com/photos/5103042/pexels-photo-5103042.jpeg",
     ],
     description: "Slim-fit formal trousers for office wear.",
@@ -154,6 +170,8 @@ export const products = [
     gender: "men",
     images: [
       "https://images.pexels.com/photos/1071878/pexels-photo-1071878.jpeg",
+      "https://images.pexels.com/photos/1071878/pexels-photo-1071878.jpeg",
+      "https://images.pexels.com/photos/1071878/pexels-photo-1071878.jpeg",
     ],
     description: "Stylish round sunglasses with UV protection.",
     sizes: [],
@@ -171,6 +189,8 @@ export const products = [
     price: 80,
     gender: "men",
     images: [
+      "https://images.pexels.com/photos/125779/pexels-photo-125779.jpeg",
+      "https://images.pexels.com/photos/125779/pexels-photo-125779.jpeg",
       "https://images.pexels.com/photos/125779/pexels-photo-125779.jpeg",
     ],
     description: "Classic analog wristwatch with leather strap.",
@@ -190,6 +210,8 @@ export const products = [
     gender: "men",
     images: [
       "https://images.pexels.com/photos/3731256/pexels-photo-3731256.jpeg",
+      "https://images.pexels.com/photos/3731256/pexels-photo-3731256.jpeg",
+      "https://images.pexels.com/photos/3731256/pexels-photo-3731256.jpeg",
     ],
     description: "Durable backpack for daily use.",
     sizes: [],
@@ -207,6 +229,8 @@ export const products = [
     price: 70,
     gender: "men",
     images: [
+      "https://images.pexels.com/photos/1478442/pexels-photo-1478442.jpeg",
+      "https://images.pexels.com/photos/1478442/pexels-photo-1478442.jpeg",
       "https://images.pexels.com/photos/1478442/pexels-photo-1478442.jpeg",
     ],
     description: "Comfortable sneakers for casual wear.",
@@ -226,6 +250,8 @@ export const products = [
     gender: "women",
     images: [
       "https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg",
+      "https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg",
+      "https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg",
     ],
     description: "Lightweight running shoes with cushioning.",
     sizes: ["5", "6", "7", "8"],
@@ -243,6 +269,8 @@ export const products = [
     price: 35,
     gender: "men",
     images: [
+      "https://images.pexels.com/photos/989938/pexels-photo-989938.jpeg",
+      "https://images.pexels.com/photos/989938/pexels-photo-989938.jpeg",
       "https://images.pexels.com/photos/989938/pexels-photo-989938.jpeg",
     ],
     description: "Premium quality leather belt for formal outfits.",
@@ -262,6 +290,8 @@ export const products = [
     gender: "women",
     images: [
       "https://images.pexels.com/photos/6630873/pexels-photo-6630873.jpeg",
+      "https://images.pexels.com/photos/6630873/pexels-photo-6630873.jpeg",
+      "https://images.pexels.com/photos/6630873/pexels-photo-6630873.jpeg",
     ],
     description: "Cozy woolen scarf for winter.",
     sizes: [],
@@ -279,6 +309,8 @@ export const products = [
     price: 25,
     gender: "men",
     images: [
+      "https://images.pexels.com/photos/33971515/pexels-photo-33971515.jpeg",
+      "https://images.pexels.com/photos/33971515/pexels-photo-33971515.jpeg",
       "https://images.pexels.com/photos/33971515/pexels-photo-33971515.jpeg",
     ],
     description: "Casual slim-fit cotton shirt.",
@@ -298,6 +330,8 @@ export const products = [
     gender: "women",
     images: [
       "https://images.pexels.com/photos/34097019/pexels-photo-34097019.jpeg",
+      "https://images.pexels.com/photos/34097019/pexels-photo-34097019.jpeg",
+      "https://images.pexels.com/photos/34097019/pexels-photo-34097019.jpeg",
     ],
     description: "Lightweight dress perfect for summer outings.",
     sizes: ["S", "M", "L"],
@@ -315,6 +349,8 @@ export const products = [
     price: 15,
     gender: "women",
     images: [
+      "https://images.pexels.com/photos/834893/pexels-photo-834893.jpeg",
+      "https://images.pexels.com/photos/834893/pexels-photo-834893.jpeg",
       "https://images.pexels.com/photos/834893/pexels-photo-834893.jpeg",
     ],
     description: "Non-slip yoga mat with extra cushioning.",
@@ -334,6 +370,8 @@ export const products = [
     gender: "women",
     images: [
       "https://images.pexels.com/photos/1334602/pexels-photo-1334602.jpeg",
+      "https://images.pexels.com/photos/1334602/pexels-photo-1334602.jpeg",
+      "https://images.pexels.com/photos/1334602/pexels-photo-1334602.jpeg",
     ],
     description: "Smartwatch with health tracking features.",
     sizes: [],
@@ -351,6 +389,8 @@ export const products = [
     price: 23.99,
     gender: "men",
     images: [
+      "https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg",
+      "https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg",
       "https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg",
     ],
     description: "Trendy graphic print t-shirt.",
@@ -370,6 +410,8 @@ export const products = [
     gender: "men",
     images: [
       "https://images.pexels.com/photos/3228909/pexels-photo-3228909.jpeg",
+      "https://images.pexels.com/photos/3228909/pexels-photo-3228909.jpeg",
+      "https://images.pexels.com/photos/3228909/pexels-photo-3228909.jpeg",
     ],
     description: "Classic polo t-shirt for casual wear.",
     sizes: ["M", "L", "XL"],
@@ -387,6 +429,8 @@ export const products = [
     price: 89,
     gender: "women",
     images: [
+      "https://images.pexels.com/photos/13596383/pexels-photo-13596383.jpeg",
+      "https://images.pexels.com/photos/13596383/pexels-photo-13596383.jpeg",
       "https://images.pexels.com/photos/13596383/pexels-photo-13596383.jpeg",
     ],
     description: "Premium leather handbag for daily use.",
@@ -406,6 +450,8 @@ export const products = [
     gender: "men",
     images: [
       "https://images.pexels.com/photos/12212788/pexels-photo-12212788.jpeg",
+      "https://images.pexels.com/photos/12212788/pexels-photo-12212788.jpeg",
+      "https://images.pexels.com/photos/12212788/pexels-photo-12212788.jpeg",
     ],
     description: "Comfortable cargo pants with multiple pockets.",
     sizes: ["30", "32", "34", "36"],
@@ -424,6 +470,8 @@ export const products = [
     gender: "women",
     images: [
       "https://images.pexels.com/photos/963457/pexels-photo-963457.jpeg",
+      "https://images.pexels.com/photos/963457/pexels-photo-963457.jpeg",
+      "https://images.pexels.com/photos/963457/pexels-photo-963457.jpeg",
     ],
     description: "Elegant high heels for parties and formal events.",
     sizes: ["5", "6", "7", "8"],
@@ -441,6 +489,8 @@ export const products = [
     price: 39,
     gender: "men",
     images: [
+      "https://images.pexels.com/photos/9775856/pexels-photo-9775856.jpeg",
+      "https://images.pexels.com/photos/9775856/pexels-photo-9775856.jpeg",
       "https://images.pexels.com/photos/9775856/pexels-photo-9775856.jpeg",
     ],
     description: "Warm cotton sweatshirt for winter.",

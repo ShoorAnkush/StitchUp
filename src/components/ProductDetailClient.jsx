@@ -20,6 +20,7 @@ const standardSizes = {
 export default function ProductDetailClient({ product }) {
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
+  const [quantity, setQuantity] = useState(1);
 
   // safe guards
   const images = Array.isArray(product?.images) ? product.images : [];
@@ -59,7 +60,7 @@ export default function ProductDetailClient({ product }) {
       <div className="hidden md:grid md:grid-cols-2 gap-4">
         {images.map((image, index) => (
           <div key={index} className="flex justify-center">
-            <div className="relative w-auto h-[500px]">
+            <div className="relative w-full h-[500px]">
               <Image
                 src={image}
                 alt={product?.name ?? "product"}
@@ -162,10 +163,14 @@ export default function ProductDetailClient({ product }) {
         {/* Quantity */}
         <div className="flex items-center pb-8">
           <p className="mr-2">Qty:</p>
-          <select className="outline-none" defaultValue={1}>
-            {Array.from({ length: 5 }, (_, i) => (
-              <option key={i} value={i + 1}>
-                {i + 1}
+          <select
+            className="border border-gray-300 rounded px-2 py-1 text-sm outline-none"
+            value={quantity}
+            onChange={(e) => setQuantity(Number(e.target.value))}
+          >
+            {[1, 2, 3, 4, 5].map((q) => (
+              <option key={q} value={q}>
+                {q}
               </option>
             ))}
           </select>
@@ -177,6 +182,7 @@ export default function ProductDetailClient({ product }) {
           product={product}
           selectedColor={selectedColor}
           selectedSize={selectedSize}
+          quantity={quantity}
         />
       </section>
     </div>

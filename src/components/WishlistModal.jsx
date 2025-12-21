@@ -1,12 +1,28 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useCart } from "@/context/CartContext";
+import { useWishlist } from "@/context/WishlistContext";
+import Image from "next/image";
 
-export const AuthModal = ({ onClose }) => {
-  const [isLogin, setIsLogin] = useState(true);
-  const [loading, setLoading] = useState(false);
+export const WishlistModal = ({ onClose, product }) => {
+  const { toggleCartItems } = useCart();
+  const { removeFromWishlist } = useWishlist();
 
-  // Lock body scroll when modal is open
+  const [selectedSize, setSelectedSize] = useState(null);
+  const [selectedColor, setSelectedColor] = useState(null);
+
+  const colors = product?.colors ?? [];
+  const stock = product?.stock ?? {};
+  const sizes = (product?.sizes ?? []).filter((size) => (stock[size] ?? 0) > 0);
+
+  const imgSrc =
+    Array.isArray(product.images) && product.images.length
+      ? product.images[0]
+      : typeof product.images === "string"
+      ? product.images
+      : "/images/placeholder.png";
+
   useEffect(() => {
     document.body.style.overflow = "clip";
     return () => {
@@ -14,82 +30,137 @@ export const AuthModal = ({ onClose }) => {
     };
   }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-
   return (
     <div
-      className="fixed inset-0 flex items-center justify-center z-50 bg-black/30"
+      className="fixed inset-0 flex items-center justify-center z-50 bg-black/20"
       onClick={onClose}
     >
       <div
         role="dialog"
         aria-modal="true"
-        className="backdrop-blur-sm border border-white/20 rounded-2xl shadow-2xl w-full max-w-sm p-8 relative bg-white/10 text-white min-h-[520px] flex flex-col justify-center"
         onClick={(e) => e.stopPropagation()}
+        className="
+          backdrop-blur-sm
+          bg-white/10
+          border border-white/20
+          rounded-2xl shadow-2xl
+          w-full max-w-sm p-8
+          relative
+          flex flex-col justify-center
+          text-white
+        "
       >
+        {/* Close */}
         <button
-          type="button"
           onClick={onClose}
-          className="absolute cursor-pointer top-4 right-4 text-white hover:text-gray-200 text-2xl"
+          className="absolute top-4 right-4 text-2xl text-white/80 hover:text-white transition cursor-pointer"
         >
           ✕
         </button>
 
-        <h2 className="text-3xl font-semibold mb-8 text-center tracking-wide drop-shadow-md">
-          {isLogin ? "Welcome Back" : "Create Account"}
+        <div className="cursor-pointer w-24 h-24 flex items-center justify-center border border-gray-300 rounded overflow-hidden">
+          <Image
+            src={imgSrc}
+            alt={product.name}
+            width={500}
+            height={500}
+            className="w-full h-full object-cover"
+            quality={85}
+            priority={false}
+          />
+        </div>
+
+        {/* Title */}
+        <h2
+          className="
+          text-2xl font-semibold text-center mb-6 tracking-wide
+          text-white
+          drop-shadow-[0_2px_6px_rgba(0,0,0,0.45)]
+        "
+        >
+          Select Options
         </h2>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
-          {!isLogin && (
-            <input
-              type="text"
-              placeholder="Name"
-              className="w-full text-xl bg-white/30 placeholder-gray-200 placeholder:text-md text-white border border-white/30 rounded-lg p-2 focus:ring-2 focus:ring-white focus:outline-none"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-          )}
-
-          <input
-            type="email"
-            placeholder="Email"
-            className="w-full text-xl bg-white/30 placeholder-gray-200 placeholder:text-md text-white border border-white/30 rounded-lg p-2 focus:ring-2 focus:ring-white focus:outline-none"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-
-          <input
-            type="password"
-            placeholder="Password"
-            className="w-full text-xl bg-white/30 placeholder-gray-200 placeholder:text-md text-white border border-white/30 rounded-lg p-2 focus:ring-2 focus:ring-white focus:outline-none"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-
-          <button
-            disabled={loading}
-            type="submit"
-            className="w-full bg-black/80 hover:bg-black/90 text-white mt-6 py-3 rounded-lg font-medium tracking-wide transition disabled:opacity-60 cursor-pointer"
+        {/* Product Info */}
+        <div className="text-center mb-6">
+          <p
+            className="
+            font-semibold text-lg
+            text-white
+            drop-shadow-[0_1px_4px_rgba(0,0,0,0.35)]
+          "
           >
-            {loading ? "Please wait..." : isLogin ? "Login" : "Sign Up"}
-          </button>
-        </form>
+            {product?.name}
+          </p>
+          <p className="text-lg text-white mt-1">${product?.price}</p>
+        </div>
 
-        <p className="text-center mt-6 text-gray-200 text-sm">
-          {isLogin ? "Don't have an account? " : "Already have an account? "}
-          <button
-            type="button"
-            onClick={() => setIsLogin(!isLogin)}
-            className="text-white font-medium hover:underline cursor-pointer"
-          >
-            {isLogin ? "Sign Up" : "Login"}
-          </button>
-        </p>
+        {/* Color */}
+        {colors.length > 0 && (
+          <div className="mb-6 text-center">
+            <p className="text-sm mb-2 text-white/80 tracking-wide">Color</p>
+            <div className="flex justify-center gap-3">
+              {colors.map((color) => (
+                <button
+                  key={color}
+                  onClick={() => setSelectedColor(color)}
+                  className={`
+                    w-8 h-8 rounded-md border transition cursor-pointer
+                    ${
+                      selectedColor === color
+                        ? "border-white border-2 scale-105 shadow-md"
+                        : "border-white/40 hover:scale-105"
+                    }
+                  `}
+                  style={{ backgroundColor: color }}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Size */}
+        {sizes.length > 0 && (
+          <div className="mb-6 text-center">
+            <p className="text-sm mb-2 text-white/80 tracking-wide">Size</p>
+            <div className="flex justify-center gap-2 flex-wrap">
+              {sizes.map((size) => (
+                <button
+                  key={size}
+                  onClick={() => setSelectedSize(size)}
+                  className={`
+                    w-10 h-9 rounded-md text-sm font-medium border transition cursor-pointer
+                    ${
+                      selectedSize === size
+                        ? "bg-white text-black border-white shadow-md scale-105"
+                        : "border-white/40 hover:bg-white/20 hover:scale-105"
+                    }
+                  `}
+                >
+                  {size}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Action */}
+        <button
+          disabled={!selectedSize || (colors.length > 0 && !selectedColor)}
+          onClick={() => {
+            toggleCartItems(product, selectedSize, selectedColor);
+            onClose();
+            removeFromWishlist(product.id);
+          }}
+          className="
+            w-full py-3 rounded-lg
+            bg-black/80 hover:bg-black/90
+            font-semibold tracking-wide
+            transition cursor-pointer
+          "
+        >
+          🛒 Add to Cart
+        </button>
       </div>
     </div>
   );
