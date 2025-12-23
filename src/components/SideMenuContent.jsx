@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { CgProfile } from "react-icons/cg";
 import { SideMenuCards } from "@/components/SideMenuCards";
 import { products } from "@/data/products";
@@ -48,12 +48,12 @@ export const SideMenuContent = ({ setIsOpen }) => {
         </div>
 
         {/* Gender Toggle */}
-        <div className="grid grid-cols-2 text-lg px-6 pb-2 overflow-x-hidden">
+        <div className="grid grid-cols-2 text-lg px-auto pb-2 overflow-x-hidden">
           {["men", "women"].map((gender) => (
             <button
               key={gender}
               onClick={() => handleGenderChange(gender)}
-              className={`relative py-2 transition-all duration-200 font-medium transform origin-center cursor-pointer
+              className={`relative py-2 w-full transition-all duration-200 font-medium transform origin-center cursor-pointer
                 ${
                   selectedGender === gender
                     ? "text-black after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:bg-black"
@@ -81,7 +81,7 @@ export const SideMenuContent = ({ setIsOpen }) => {
                   {section}
                 </h2>
 
-                <div className="grid w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 place-items-center">
+                <div className="grid w-full grid-cols-2 sm:grid-cols-3 gap-4 place-items-center">
                   {categories.map((category) => {
                     const product = currentGenderData[section][category];
                     return (

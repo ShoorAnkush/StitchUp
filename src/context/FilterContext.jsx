@@ -90,13 +90,13 @@ export const FilterProvider = ({ children }) => {
   return (
     <FilterContext.Provider
       value={{
-        /* 🔹 expose derived state */
+        /* expose derived state */
         selectedCategories: filters.categories,
         selectedSizes: filters.sizes,
         priceRange: filters.priceRange,
         sortOrder: filters.sortOrder,
 
-        /* 🔹 actions */
+        /* actions */
         toggleCategory,
         toggleSize,
         togglePrice,

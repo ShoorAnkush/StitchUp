@@ -14,7 +14,7 @@ const categories = Object.keys(categoryMap);
 
 export const CategoryCard = () => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-6">
+    <div className="grid grid-cols-2 min-[420px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-6">
       {categories.map((category) => {
         const product = categoryMap[category];
         if (!product) return null;
@@ -35,7 +35,7 @@ export const CategoryCard = () => {
             href={href}
             className="flex flex-col items-center bg-gray-100 rounded-lg shadow hover:shadow-lg p-4 hover:scale-105 transition"
           >
-            <div className="w-52 h-52 rounded overflow-hidden">
+            <div className="w-32 h-32 md:w-52 md:h-52 rounded overflow-hidden">
               <Image
                 src={img}
                 alt={category}
@@ -44,7 +44,9 @@ export const CategoryCard = () => {
                 className="object-cover w-full h-full"
               />
             </div>
-            <span className="mt-2 text-sm font-semibold">{category}</span>
+            <span className="my-2 text-sm font-semibold text-gray-800">
+              {category}
+            </span>
           </Link>
         );
       })}

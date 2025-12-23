@@ -15,9 +15,9 @@ export const SidebarMenu = () => {
   };
 
   return (
-    <>
+    <div>
       <div className="z-100 relative">
-        <Hamburger toggled={isOpen} toggle={setIsOpen} size={28} />
+        <Hamburger toggled={isOpen} toggle={setIsOpen} size={26} />
       </div>
 
       <AnimatePresence>
@@ -34,7 +34,7 @@ export const SidebarMenu = () => {
 
             {/* Sidebar Panel */}
             <motion.div
-              className="fixed h-screen top-0 bottom-0 left-0 w-5/6 md:w-150 bg-white shadow-lg z-50 p-6 flex flex-col"
+              className="fixed h-screen top-0 bottom-0 left-0 w-full md:w-150 bg-white shadow-lg z-50 p-6 flex flex-col"
               initial="hidden"
               animate="visible"
               exit="exit"
@@ -48,6 +48,6 @@ export const SidebarMenu = () => {
           </>
         )}
       </AnimatePresence>
-    </>
+    </div>
   );
 };

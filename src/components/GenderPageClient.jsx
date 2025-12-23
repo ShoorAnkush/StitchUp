@@ -68,8 +68,8 @@ export function GenderPageClient({ gender, products }) {
       </div>
 
       {/* Right side */}
-      <div className="flex flex-col flex-1 mb-8">
-        {/* Sort dropdown */}
+      <div className="flex flex-col flex-1 mb-16">
+        {/* Desktop Sort */}
         <div className="hidden md:flex justify-end mr-4 mt-2">
           <div className="dropdown dropdown-end text-black">
             <div tabIndex={0} role="button" className="btn m-1">
@@ -81,9 +81,7 @@ export function GenderPageClient({ gender, products }) {
             >
               {sortOptions.map((sort) => (
                 <li key={sort}>
-                  <button type="button" onClick={() => toggleSort(sort)}>
-                    {sort}
-                  </button>
+                  <button onClick={() => toggleSort(sort)}>{sort}</button>
                 </li>
               ))}
             </ul>
@@ -91,7 +89,7 @@ export function GenderPageClient({ gender, products }) {
         </div>
 
         {/* Product grid */}
-        <div className="grid mx-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-4 gap-6 p-6 items-start">
+        <div className="grid grid-cols-2 xl:grid-cols-4 gap-6 p-6">
           {filteredProducts.map((product) => (
             <Link key={product.id} href={`/product/${product.id}`}>
               <ProductCard product={product} />
@@ -100,9 +98,13 @@ export function GenderPageClient({ gender, products }) {
         </div>
       </div>
 
-      <div>
-        <MobileFilterBar />
-      </div>
+      {/* Mobile Bottom Bar */}
+      <MobileFilterBar
+        gender={gender}
+        sortOptions={sortOptions}
+        toggleSort={toggleSort}
+        activeSort={sortOrder}
+      />
     </div>
   );
 }

@@ -74,7 +74,7 @@ export const Landing = () => {
       </section>
 
       {/* Categories Cards */}
-      <section className="mx-auto py-16 px-6">
+      <section className="mx-auto pb-16 px-6">
         <h2 className="text-3xl font-bold text-center mb-10 text-black">
           CATEGORIES
         </h2>
@@ -82,8 +82,10 @@ export const Landing = () => {
       </section>
 
       {/* Trending Cards */}
-      <section className="mx-auto py-16 px-6">
-        <h2 className="text-3xl font-bold text-center text-black">Trending</h2>
+      <section className="mx-auto pb-16 px-6">
+        <h2 className="text-3xl font-bold text-center mb-10 text-black">
+          TRENDING
+        </h2>
         <TrendingCard />
       </section>
     </div>

@@ -14,19 +14,15 @@ export const ProductCard = React.memo(({ product }) => {
       : "/images/placeholder.png";
 
   return (
-    <div className="bg-white w-76 rounded-xl shadow-md hover:shadow-lg transition p-4 cursor-pointer">
-      <div
-        className="relative w-full"
-        style={{ height: 344 /* same as your old height */ }}
-      >
+    <div className="bg-white shadow-md hover:shadow-lg transition p-1 sm:p-4 cursor-pointer">
+      <div className="relative w-full h-56 sm:h-92 overflow-hidden">
         <Image
           src={src}
           alt={product?.name ?? "product"}
           fill
-          style={{ objectFit: "cover" }}
+          className="object-cover"
           sizes="(max-width: 640px) 100vw, 300px"
           quality={85}
-          priority={false}
         />
         <span
           onClick={(e) => {
@@ -40,10 +36,14 @@ export const ProductCard = React.memo(({ product }) => {
         </span>
       </div>
 
-      <h2 className="mt-3 text-lg font-semibold text-black">{product.name}</h2>
+      <h2 className="mt-2 sm:mt-3 text-sm sm:text-lg font-semibold text-black">
+        {product.name}
+      </h2>
       <hr className="bg-gray-400" />
-      <p className="text-gray-600 text-sm">{product.category}</p>
-      <p className="mt-2 text-gray-900 font-bold">${product.price}</p>
+      <p className="text-gray-600 text-xs sm:text-sm">{product.category}</p>
+      <p className="mt-1.5 sm:mt-2 text-sm sm:text-base text-gray-900 font-bold">
+        ${product.price}
+      </p>
     </div>
   );
 });

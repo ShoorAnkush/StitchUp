@@ -52,7 +52,17 @@ export const BrandsShowcase = React.memo(() => {
     <Swiper
       modules={[Navigation]}
       spaceBetween={20}
-      slidesPerView={3}
+      breakpoints={{
+        0: {
+          slidesPerView: 1,
+        },
+        640: {
+          slidesPerView: 2,
+        },
+        1024: {
+          slidesPerView: 3,
+        },
+      }}
       navigation
       style={{
         "--swiper-theme-color": "#4B5563", // gray-600

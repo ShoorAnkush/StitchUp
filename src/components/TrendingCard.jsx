@@ -7,7 +7,7 @@ export const TrendingCard = () => {
 
   return (
     <div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-6">
+      <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:p-6">
         {trendingProducts.map((product) => (
           <Link key={product.id} href={`/product/${product.id}`}>
             <ProductCard product={product} />
