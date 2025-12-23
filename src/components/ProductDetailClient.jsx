@@ -40,7 +40,7 @@ export default function ProductDetailClient({ product }) {
   return (
     <div className="md:grid md:grid-cols-2 gap-6 p-6">
       {/* Mobile: Image Swiper */}
-      <div className="block md:hidden">
+      <div className="block xmd:hidden">
         <Swiper
           spaceBetween={10}
           slidesPerView={1}
@@ -65,7 +65,7 @@ export default function ProductDetailClient({ product }) {
       </div>
 
       {/* Desktop: Grid */}
-      <div className="hidden md:grid md:grid-cols-2 gap-4">
+      <div className="hidden xmd:grid xmd:grid-cols-2 gap-4">
         {images.map((image, index) => (
           <div key={index} className="flex justify-center">
             <div className="relative w-full h-[500px]">
@@ -108,12 +108,12 @@ export default function ProductDetailClient({ product }) {
                 <li
                   onClick={() => setSelectedColor(color)}
                   key={index}
-                  className="flex flex-col items-center cursor-pointer group"
+                  className="flex flex-col items-center cursor-pointer group active:scale-90 transition"
                 >
                   <span
                     className={`w-12 h-12 rounded-md border group-hover:scale-105 ${
                       selectedColor === color
-                        ? "border-black border-2"
+                        ? "border-gray-300 border-4"
                         : "border-gray-300"
                     }`}
                     style={{ backgroundColor: color }}
@@ -144,13 +144,14 @@ export default function ProductDetailClient({ product }) {
                   <li
                     onClick={() => availableSize && setSelectedSize(size)}
                     key={index}
-                    className={`flex items-center justify-center border border-gray-400 w-12 h-10 rounded-md hover:bg-gray-100 ${
-                      availableSize
-                        ? selectedSize === size
-                          ? "bg-gray-900 text-white hover:bg-gray-900"
-                          : "cursor-pointer hover:bg-gray-200"
-                        : "bg-gray-100 text-gray-400 cursor-not-allowed"
-                    }`}
+                    className={`flex items-center justify-center border border-gray-400 w-12 h-10 
+                      rounded-md hover:bg-gray-100 active:scale-90 transition ${
+                        availableSize
+                          ? selectedSize === size
+                            ? "bg-gray-900 text-white hover:bg-gray-900"
+                            : "cursor-pointer hover:bg-gray-200"
+                          : "bg-gray-100 text-gray-400 cursor-not-allowed"
+                      }`}
                     role="button"
                     aria-pressed={selectedSize === size}
                     tabIndex={availableSize ? 0 : -1}

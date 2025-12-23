@@ -18,8 +18,8 @@ export const ProductDetailFooter = ({
         onClick={() => {
           toggleWishlistButton(product.id);
         }}
-        className="flex-1 border border-gray-400 text-gray-700 font-medium py-2 rounded-lg 
-                   hover:bg-gray-100 hover:scale-95 transition cursor-pointer shadow-xl/20"
+        className="flex-1 border border-gray-400 text-gray-700 font-medium p-2 rounded-lg 
+        hover:bg-gray-100 hover:scale-95 transition cursor-pointer shadow-xl/20"
       >
         {isInWishlist(product.id)
           ? `♥ Remove From Wishlist`
@@ -30,7 +30,7 @@ export const ProductDetailFooter = ({
         onClick={() => {
           toggleCartItems(product, selectedSize, selectedColor, quantity);
         }}
-        className="flex-1 bg-gray-800 text-white font-semibold py-2 rounded-lg 
+        className="flex-1 bg-gray-800 text-white font-semibold p-2 rounded-lg 
                    hover:bg-gray-900 hover:scale-95 transition cursor-pointer shadow-xl/20"
       >
         {isInCart(product.id, selectedSize, selectedColor)

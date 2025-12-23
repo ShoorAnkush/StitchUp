@@ -89,7 +89,7 @@ export function GenderPageClient({ gender, products }) {
         </div>
 
         {/* Product grid */}
-        <div className="grid grid-cols-2 xl:grid-cols-4 gap-6 p-6">
+        <div className="grid grid-cols-2 xl:grid-cols-4 xs:gap-6 xs:p-6">
           {filteredProducts.map((product) => (
             <Link key={product.id} href={`/product/${product.id}`}>
               <ProductCard product={product} />

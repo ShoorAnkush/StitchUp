@@ -35,10 +35,14 @@ export const Navbar = () => {
 
   const placeholder = useTypewriterPlaceholder(placeholders);
 
+  const closeDropdown = () => {
+    document.activeElement?.blur();
+  };
+
   return (
     <div className="top-0 sticky z-50">
       <nav className="relative bg-[#f9f9f9] shadow-sm border-b border-gray-200">
-        <div className="flex items-center justify-between px-4 md:px-8 h-16 relative">
+        <div className="flex items-center justify-between px-1 md:px-8 h-16 relative">
           {/* Left Section */}
           <div className="flex items-center gap-4 md:gap-16 text-black">
             <div className="">
@@ -88,7 +92,7 @@ export const Navbar = () => {
           </div>
 
           {/* Right Icons */}
-          <div className="flex items-center md:gap-4 text-2xl relative z-20">
+          <div className="flex items-center gap-2 md:gap-4 text-2xl relative z-20">
             {/* Desktop Search */}
             <form
               onSubmit={(e) => {
@@ -131,7 +135,7 @@ export const Navbar = () => {
                   setMobileSearchOpen(false);
                 }}
                 className="lg:hidden flex items-center gap-2 border rounded-full px-4 py-2
-               bg-white shadow-sm text-black"
+               bg-white shadow-sm text-black transition"
               >
                 <input
                   autoFocus
@@ -190,10 +194,10 @@ export const Navbar = () => {
 
               {/* Dropdown */}
               <div
-                tabIndex={-1}
+                tabIndex={0}
                 className="dropdown-content z-50 mt-3 w-56 rounded-2xl
-               bg-white shadow-2xl border border-gray-100
-               text-gray-800 overflow-hidden"
+                bg-white shadow-2xl border border-gray-100
+                text-gray-800 overflow-hidden"
               >
                 {/* Header */}
                 <div className="px-4 py-3 bg-linear-to-r from-gray-50 to-white">
@@ -219,8 +223,9 @@ export const Navbar = () => {
                   {/* Wishlist */}
                   <Link
                     href="/wishlist"
+                    onClick={closeDropdown}
                     className="flex items-center justify-between px-3 py-2
-                   rounded-xl hover:bg-gray-100 transition"
+                    rounded-xl hover:bg-gray-100 transition"
                   >
                     <div className="flex items-center gap-3">
                       <div className="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center">
@@ -239,8 +244,9 @@ export const Navbar = () => {
                   {/* Cart */}
                   <Link
                     href="/cart"
+                    onClick={closeDropdown}
                     className="flex items-center justify-between px-3 py-2
-                   rounded-xl hover:bg-gray-100 transition"
+                    rounded-xl hover:bg-gray-100 transition"
                   >
                     <div className="flex items-center gap-3">
                       <div className="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center">
@@ -261,17 +267,23 @@ export const Navbar = () => {
                 <div className="border-t border-gray-100 px-4 py-3">
                   {user ? (
                     <button
-                      onClick={logout}
+                      onClick={() => {
+                        logout();
+                        closeDropdown();
+                      }}
                       className="w-full text-left text-lg font-semibold
-                     text-red-500 hover:text-red-600 transition"
+                      text-red-500 hover:text-red-600 cursor-pointer transition"
                     >
                       Logout
                     </button>
                   ) : (
                     <button
-                      onClick={() => setShowAuth(true)}
+                      onClick={() => {
+                        setShowAuth(true);
+                        closeDropdown();
+                      }}
                       className="w-full text-left text-lg font-semibold
-                     text-black hover:text-gray-700 transition"
+                      text-black hover:text-gray-700 cursor-pointer transition"
                     >
                       Sign in
                     </button>
@@ -302,7 +314,7 @@ export const Navbar = () => {
             {/* Cart */}
             <Link
               href="/cart"
-              className="group relative w-12 flex flex-col items-center justify-center cursor-pointer text-gray-600 hover:text-black transition"
+              className="group relative w-12 hidden xs:flex flex-col items-center justify-center cursor-pointer text-gray-600 hover:text-black transition"
             >
               <IoBagHandleOutline className="text-[18px] md:text-[20px]" />
               <span className="text-[11px] font-bold leading-none mt-1">
@@ -319,7 +331,7 @@ export const Navbar = () => {
         </div>
 
         {/* Mobile Menu */}
-        <div className="grid grid-cols-2 gap-5 text-lg md:hidden border-t bg-white">
+        <div className="grid grid-cols-2 text-lg md:hidden border-t bg-white">
           <Link
             href="/men"
             className={`flex justify-center cursor-pointer p-3 font-medium transition ${

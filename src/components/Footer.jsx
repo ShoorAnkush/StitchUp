@@ -10,7 +10,7 @@ export function Footer() {
         {/* Brand + CTA */}
         <div className="md:max-w-[24rem]">
           <Image
-            src="/images/logo-footer.png"
+            src="/images/icon.png"
             alt="Ankush Shoor Logo"
             className="h-11 w-auto"
             width={176}
@@ -54,7 +54,7 @@ export function Footer() {
         </div>
 
         {/* Right side */}
-        <div className="flex-1 flex flex-col sm:flex-row items-start md:justify-end gap-16 md:gap-32">
+        <div className="flex-1 flex flex-row items-start md:justify-end gap-12 xs:gap-16 md:gap-32">
           {/* Navigation */}
           <div>
             <h2 className="font-semibold mb-5 text-white">Portfolio</h2>
@@ -65,17 +65,17 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/projects" className="hover:text-white">
+                <Link href="/" className="hover:text-white">
                   Projects
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="hover:text-white">
+                <Link href="/" className="hover:text-white">
                   Contact
                 </Link>
               </li>
               <li>
-                <Link href="/resume" className="hover:text-white">
+                <Link href="/" className="hover:text-white">
                   Resume
                 </Link>
               </li>
