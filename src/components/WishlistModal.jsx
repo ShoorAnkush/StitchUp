@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
 import Image from "next/image";
+import { useAutoSelectOptions } from "@/hooks/useAutoSelectOptions";
 
 export const WishlistModal = ({ onClose, product }) => {
   const { toggleCartItems } = useCart();
@@ -23,6 +24,13 @@ export const WishlistModal = ({ onClose, product }) => {
       ? product.images
       : "/images/placeholder.png";
 
+  useAutoSelectOptions({
+    colors,
+    sizes,
+    setSelectedColor,
+    setSelectedSize,
+  });
+
   useEffect(() => {
     document.body.style.overflow = "clip";
     return () => {
@@ -40,15 +48,7 @@ export const WishlistModal = ({ onClose, product }) => {
         aria-modal="true"
         onClick={(e) => e.stopPropagation()}
         className="
-          backdrop-blur-sm
-          bg-white/10
-          border border-white/20
-          rounded-2xl shadow-2xl
-          w-full max-w-sm p-8
-          relative
-          flex flex-col justify-center
-          text-white
-        "
+          backdrop-blur-sm bg-white/10 border border-white/20 rounded-2xl shadow-2xl w-full max-w-sm p-8 relative flex flex-col justify-center text-white"
       >
         {/* Close */}
         <button
@@ -58,41 +58,26 @@ export const WishlistModal = ({ onClose, product }) => {
           ✕
         </button>
 
-        <div className="cursor-pointer w-24 h-24 flex items-center justify-center border border-gray-300 rounded overflow-hidden">
-          <Image
-            src={imgSrc}
-            alt={product.name}
-            width={500}
-            height={500}
-            className="w-full h-full object-cover"
-            quality={85}
-            priority={false}
-          />
-        </div>
+        <div className="flex items-center gap-4 mb-2">
+          {/* Image */}
+          <div className="w-20 h-20 shrink-0 rounded-lg overflow-hidden border border-white/30">
+            <Image
+              src={imgSrc}
+              alt={product.name}
+              width={500}
+              height={500}
+              className="w-full h-full object-cover"
+              quality={85}
+            />
+          </div>
 
-        {/* Title */}
-        <h2
-          className="
-          text-2xl font-semibold text-center mb-6 tracking-wide
-          text-white
-          drop-shadow-[0_2px_6px_rgba(0,0,0,0.45)]
-        "
-        >
-          Select Options
-        </h2>
-
-        {/* Product Info */}
-        <div className="text-center mb-6">
-          <p
-            className="
-            font-semibold text-lg
-            text-white
-            drop-shadow-[0_1px_4px_rgba(0,0,0,0.35)]
-          "
-          >
-            {product?.name}
-          </p>
-          <p className="text-lg text-white mt-1">${product?.price}</p>
+          {/* Info */}
+          <div className="flex flex-col">
+            <p className="text-lg font-semibold text-white leading-tight">
+              {product?.name}
+            </p>
+            <p className="text-base text-white/90 mt-1">${product?.price}</p>
+          </div>
         </div>
 
         {/* Color */}
@@ -105,10 +90,10 @@ export const WishlistModal = ({ onClose, product }) => {
                   key={color}
                   onClick={() => setSelectedColor(color)}
                   className={`
-                    w-8 h-8 rounded-md border transition cursor-pointer
+                    w-9 h-9 rounded-md border transition-transform duration-150 flex items-center justify-center active:scale-[0.85]
                     ${
                       selectedColor === color
-                        ? "border-white border-2 scale-105 shadow-md"
+                        ? "border-white border-[3px] scale-100"
                         : "border-white/40 hover:scale-105"
                     }
                   `}
@@ -128,14 +113,13 @@ export const WishlistModal = ({ onClose, product }) => {
                 <button
                   key={size}
                   onClick={() => setSelectedSize(size)}
-                  className={`
-                    w-10 h-9 rounded-md text-sm font-medium border transition cursor-pointer
-                    ${
-                      selectedSize === size
-                        ? "bg-white text-black border-white shadow-md scale-105"
-                        : "border-white/40 hover:bg-white/20 hover:scale-105"
-                    }
-                  `}
+                  className={`w-11 h-10 rounded-md text-sm font-medium  border transition-transform duration-150 flex items-center justify-center active:scale-[0.9]
+                      ${
+                        selectedSize === size
+                          ? "bg-white text-black border-white border-2"
+                          : "border-white/40 hover:bg-white/20 hover:scale-105"
+                      }
+                    `}
                 >
                   {size}
                 </button>
@@ -153,11 +137,7 @@ export const WishlistModal = ({ onClose, product }) => {
             removeFromWishlist(product.id);
           }}
           className="
-            w-full py-3 rounded-lg
-            bg-black/80 hover:bg-black/90
-            font-semibold tracking-wide
-            transition cursor-pointer
-          "
+            w-full py-3 rounded-lg active:scale-[0.85] bg-black/80 hover:bg-black/90 font-semibold tracking-wide transition cursor-pointer"
         >
           🛒 Add to Cart
         </button>

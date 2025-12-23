@@ -66,7 +66,7 @@ export const Landing = () => {
       </div>
 
       {/* Brands Card */}
-      <section className="m-16">
+      <section className="mx-auto py-16">
         <h2 className="text-3xl font-bold text-center text-black mb-10">
           OFFICIAL COLLABS
         </h2>

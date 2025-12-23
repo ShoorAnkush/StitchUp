@@ -14,7 +14,7 @@ const categories = Object.keys(categoryMap);
 
 export const CategoryCard = () => {
   return (
-    <div className="grid grid-cols-2 min-[420px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-6">
+    <div className="grid grid-cols-2 min-[420px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:p-6">
       {categories.map((category) => {
         const product = categoryMap[category];
         if (!product) return null;

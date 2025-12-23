@@ -9,6 +9,7 @@ import Image from "next/image";
 
 import "swiper/css";
 import "swiper/css/pagination";
+import { useAutoSelectOptions } from "@/hooks/useAutoSelectOptions";
 
 const standardSizes = {
   Topwear: ["XS", "S", "M", "L", "XL", "XXL"],
@@ -28,6 +29,13 @@ export default function ProductDetailClient({ product }) {
   const sizes = Array.isArray(product?.sizes) ? product.sizes : [];
   const stock = product?.stock ?? {};
   const section = product?.section ?? null;
+
+  useAutoSelectOptions({
+    colors,
+    sizes,
+    setSelectedColor,
+    setSelectedSize,
+  });
 
   return (
     <div className="md:grid md:grid-cols-2 gap-6 p-6">

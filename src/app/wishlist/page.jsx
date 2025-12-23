@@ -78,7 +78,7 @@ export default function WishlistPage() {
           </Link>
         </div>
       ) : (
-        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 p-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-6">
           {listedProducts.map((productOrPlaceholder, idx) => {
             // If product data exists show card; otherwise show placeholder with ID so you can detect missing products
             if (!productOrPlaceholder.__missingId) {

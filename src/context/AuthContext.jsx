@@ -10,7 +10,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  // const [showAuth, setShowAuth] = useState(false);
+  const [showAuth, setShowAuth] = useState(false);
 
   const router = useRouter();
 
@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, logout }}>
+    <AuthContext.Provider value={{ user, logout, showAuth, setShowAuth }}>
       {!loading && children}
     </AuthContext.Provider>
   );

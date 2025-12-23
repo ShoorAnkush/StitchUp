@@ -23,15 +23,12 @@ const placeholders = ["Hoodies", "Sneakers", "Jackets", "Accessories"];
 export const Navbar = () => {
   const { cartItems } = useCart();
   const { wishlistItems } = useWishlist();
-  const { user, logout } = useAuth();
+  const { user, logout, showAuth, setShowAuth } = useAuth();
   const [searchQuery, setSearchQuery] = useState("");
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
 
   const router = useRouter();
   const pathname = usePathname();
-
-  const [showAuth, setShowAuth] = useState(false);
-  // const [profileOpen, setProfileOpen] = useState(false);
 
   const isActive = (href) =>
     pathname === href || pathname.startsWith(href + "/");
@@ -76,11 +73,11 @@ export const Navbar = () => {
           </div>
 
           {/* Center Logo */}
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition">
+          <div className="absolute top-1/2 left-1/3 sm:left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition">
             <Link href="/">
-              <div className="h-26 md:h-36 w-auto">
+              <div className="h-8 md:h-10 w-auto">
                 <Image
-                  src="/images/logo.png"
+                  src="/images/logo1.png"
                   alt="StitchUp Logo"
                   width={500}
                   height={500}
@@ -118,8 +115,7 @@ export const Navbar = () => {
             {!mobileSearchOpen ? (
               <button
                 onClick={() => setMobileSearchOpen(true)}
-                className="lg:hidden w-12 flex flex-col items-center justify-center
-               text-gray-600 hover:text-black transition"
+                className="lg:hidden w-12 flex flex-col items-center justify-center text-gray-600 hover:text-black transition"
               >
                 <GoSearch className="text-[18px]" />
                 <span className="text-[11px] font-bold leading-none mt-1">
@@ -181,7 +177,7 @@ export const Navbar = () => {
                   />
                 ) : (
                   <div
-                    className="group w-12 flex flex-col items-center justify-center cursor-pointer
+                    className="group pl-2 lg:pl-0 w-12 flex flex-col items-center justify-center cursor-pointer
                    text-gray-600 hover:text-black transition"
                   >
                     <FiUser className="text-[18px] md:text-[20px]" />
@@ -289,8 +285,7 @@ export const Navbar = () => {
             {/* Wishlist */}
             <Link
               href="/wishlist"
-              className="group relative w-12 hidden lg:flex flex-col items-center justify-center cursor-pointer
-                         text-gray-600 hover:text-black transition"
+              className="group relative w-12 hidden lg:flex flex-col items-center justify-center cursor-pointer text-gray-600 hover:text-black transition"
             >
               <IoMdHeartEmpty className="text-[18px] md:text-[20px]" />
               <span className="text-[11px] font-bold leading-none mt-1">
@@ -307,8 +302,7 @@ export const Navbar = () => {
             {/* Cart */}
             <Link
               href="/cart"
-              className="group relative w-12 flex flex-col items-center justify-center cursor-pointer
-                         text-gray-600 hover:text-black transition"
+              className="group relative w-12 flex flex-col items-center justify-center cursor-pointer text-gray-600 hover:text-black transition"
             >
               <IoBagHandleOutline className="text-[18px] md:text-[20px]" />
               <span className="text-[11px] font-bold leading-none mt-1">

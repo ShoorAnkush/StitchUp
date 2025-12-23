@@ -4,10 +4,12 @@ import { useState } from "react";
 import { CgProfile } from "react-icons/cg";
 import { SideMenuCards } from "@/components/SideMenuCards";
 import { products } from "@/data/products";
+import { useAuth } from "@/context/AuthContext";
 
 export const SideMenuContent = ({ setIsOpen }) => {
   const [selectedGender, setSelectedGender] = useState("men");
   const [isFading, setIsFading] = useState(false);
+  const { showAuth, setShowAuth } = useAuth();
 
   const groupedProducts = useMemo(() => {
     const grouped = {};
@@ -39,6 +41,7 @@ export const SideMenuContent = ({ setIsOpen }) => {
       <div className="sticky top-0 z-20 bg-white">
         <div className="flex justify-center py-3">
           <button
+            onClick={() => setShowAuth(true)}
             type="button"
             className="bg-white text-gray-600 text-sm flex items-center px-4 py-2 gap-2 rounded-lg border border-gray-300 shadow-sm hover:bg-gray-50 hover:shadow transition-all duration-200 cursor-pointer"
           >
