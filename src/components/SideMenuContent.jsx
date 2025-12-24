@@ -41,7 +41,10 @@ export const SideMenuContent = ({ setIsOpen }) => {
       <div className="sticky top-0 z-20 bg-white">
         <div className="flex justify-center py-3">
           <button
-            onClick={() => setShowAuth(true)}
+            onClick={() => {
+              setShowAuth(true);
+              setIsOpen(false);
+            }}
             type="button"
             className="bg-white text-gray-600 text-sm flex items-center px-4 py-2 gap-2 rounded-lg border border-gray-300 shadow-sm hover:bg-gray-50 hover:shadow transition-all duration-200 cursor-pointer"
           >

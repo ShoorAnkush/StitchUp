@@ -140,7 +140,7 @@ export const Navbar = () => {
                   autoFocus
                   type="text"
                   placeholder={`Search ${placeholder}`}
-                  className="w-32 outline-none text-sm bg-transparent"
+                  className="w-32 outline-none text-[16px] bg-transparent"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
