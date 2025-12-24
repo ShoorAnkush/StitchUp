@@ -77,17 +77,16 @@ export const Navbar = () => {
           </div>
 
           {/* Center Logo */}
-          <div className="absolute top-1/2 left-1/3 sm:left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition">
+          <div className="absolute top-1/2 left-1/3 sm:left-1/2 -translate-x-1/2 -translate-y-1/2 transition">
             <Link href="/">
-              <div className="h-8 md:h-10 w-auto">
-                <Image
-                  src="/images/logo1.png"
-                  alt="StitchUp Logo"
-                  width={500}
-                  height={500}
-                  className="w-full h-full"
-                />
-              </div>
+              <Image
+                src="/images/logo1.png"
+                alt="StitchUp Logo"
+                width={800}
+                height={208}
+                className="block h-8 md:h-10 w-auto object-contain flex-none"
+                priority
+              />
             </Link>
           </div>
 
