@@ -115,7 +115,7 @@ export const Navbar = () => {
 
             {/* Mobile / Tablet Search */}
             <button
-              onClick={() => setMobileSearchOpen(true)}
+              onClick={() => setMobileSearchOpen((prev) => !prev)}
               className="lg:hidden w-12 flex flex-col items-center justify-center text-gray-600 hover:text-black transition"
             >
               <GoSearch className="text-[18px]" />
@@ -127,7 +127,11 @@ export const Navbar = () => {
             {/* Profile */}
             <div className="dropdown dropdown-end relative">
               {/* Trigger */}
-              <div tabIndex={0} role="button">
+              <div
+                tabIndex={0}
+                role="button"
+                onMouseDown={() => setMobileSearchOpen(false)}
+              >
                 {user ? (
                   <Image
                     src={`https://ui-avatars.com/api/?name=${encodeURIComponent(
@@ -317,6 +321,8 @@ export const Navbar = () => {
                 autoFocus
                 type="text"
                 placeholder={`Search ${placeholder}`}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full text-gray-800 border border-gray-200 rounded-full
                pl-10 pr-4 py-2 text-sm outline-none"
               />
@@ -326,7 +332,6 @@ export const Navbar = () => {
               type="button"
               onClick={() => {
                 setMobileSearchOpen(false);
-
                 setSearchQuery("");
               }}
               className="text-gray-500 hover:text-black transition text-[18px]"
