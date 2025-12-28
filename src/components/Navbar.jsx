@@ -342,8 +342,10 @@ export const Navbar = () => {
         <div className="grid grid-cols-2 text-lg md:hidden border-t bg-white">
           <Link
             href="/men"
-            className={`flex justify-center p-3 font-medium ${
-              isActive("/men") ? "bg-black text-white" : "text-gray-700"
+            className={`flex justify-center cursor-pointer p-3 font-medium transition ${
+              isActive("/men")
+                ? "bg-linear-to-r from-gray-700 to-gray-500 text-white shadow-inner"
+                : "text-gray-700 hover:bg-linear-to-r hover:from-gray-100 hover:to-gray-300 active:scale-95"
             }`}
           >
             MEN
@@ -351,8 +353,10 @@ export const Navbar = () => {
 
           <Link
             href="/women"
-            className={`flex justify-center p-3 font-medium ${
-              isActive("/women") ? "bg-black text-white" : "text-gray-700"
+            className={`flex justify-center cursor-pointer p-3 font-medium transition ${
+              isActive("/women")
+                ? "bg-linear-to-r from-gray-700 to-gray-500 text-white shadow-inner"
+                : "text-gray-700 hover:bg-linear-to-r hover:from-gray-100 hover:to-gray-300 active:scale-95"
             }`}
           >
             WOMEN
