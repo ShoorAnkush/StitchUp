@@ -45,9 +45,7 @@ export const Navbar = () => {
         <div className="flex items-center justify-between px-1 md:px-8 h-16 relative">
           {/* Left Section */}
           <div className="flex items-center gap-4 md:gap-16 text-black">
-            <div className="">
-              <SidebarMenu />
-            </div>
+            <SidebarMenu />
 
             <div className="hidden md:flex text-lg gap-8 font-semibold tracking-wide">
               <Link
@@ -76,17 +74,19 @@ export const Navbar = () => {
             </div>
           </div>
 
-          {/* Center Logo */}
-          <div className="absolute top-1/2 left-1/3 sm:left-1/2 -translate-x-1/2 -translate-y-1/2 transition">
+          {/* LOGO */}
+
+          <div className="absolute top-1/2 left-1/3 sm:left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <Link href="/">
-              <Image
-                src="/images/logo1.png"
-                alt="StitchUp Logo"
-                width={800}
-                height={208}
-                className="block h-8 md:h-10 w-auto object-contain flex-none"
-                priority
-              />
+              <div className="h-8 md:h-10 w-auto">
+                <Image
+                  src="/images/logo1.png"
+                  alt="StitchUp Logo"
+                  width={500}
+                  height={500}
+                  className="w-full h-full"
+                />
+              </div>
             </Link>
           </div>
 
@@ -99,7 +99,7 @@ export const Navbar = () => {
                 if (!searchQuery.trim()) return;
                 router.push(`/search?q=${encodeURIComponent(searchQuery)}`);
               }}
-              className="hidden lg:flex items-center border rounded-full px-3 py-1 gap-2 bg-white shadow-sm hover:shadow-md transition w-[180px] md:w-[220px]"
+              className="hidden lg:flex items-center border rounded-full px-3 py-1 gap-2 bg-white shadow-sm hover:shadow-md transition"
             >
               <input
                 type="text"
@@ -114,54 +114,15 @@ export const Navbar = () => {
             </form>
 
             {/* Mobile / Tablet Search */}
-
-            {!mobileSearchOpen ? (
-              <button
-                onClick={() => setMobileSearchOpen(true)}
-                className="lg:hidden w-12 flex flex-col items-center justify-center text-gray-600 hover:text-black transition"
-              >
-                <GoSearch className="text-[18px]" />
-                <span className="text-[11px] font-bold leading-none mt-1">
-                  Search
-                </span>
-              </button>
-            ) : (
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  if (!searchQuery.trim()) return;
-                  router.push(`/search?q=${encodeURIComponent(searchQuery)}`);
-                  setMobileSearchOpen(false);
-                }}
-                className="lg:hidden flex items-center gap-2 border rounded-full px-4 py-2
-               bg-white shadow-sm text-black transition"
-              >
-                <input
-                  autoFocus
-                  type="text"
-                  placeholder={`Search ${placeholder}`}
-                  className="flex-1 outline-none text-[16px] bg-transparent"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-
-                <button type="submit">
-                  <GoSearch className="text-[18px] text-gray-600" />
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => {
-                    setMobileSearchOpen(false);
-                    setSearchQuery("");
-                  }}
-                  className="text-gray-500 hover:text-black text-[18px] transition text-base"
-                  aria-label="Close search"
-                >
-                  ✕
-                </button>
-              </form>
-            )}
+            <button
+              onClick={() => setMobileSearchOpen(true)}
+              className="lg:hidden w-12 flex flex-col items-center justify-center text-gray-600 hover:text-black transition"
+            >
+              <GoSearch className="text-[18px]" />
+              <span className="text-[11px] font-bold leading-none mt-1">
+                Search
+              </span>
+            </button>
 
             {/* Profile */}
             <div className="dropdown dropdown-end relative">
@@ -296,7 +257,7 @@ export const Navbar = () => {
             {/* Wishlist */}
             <Link
               href="/wishlist"
-              className="group relative w-12 hidden lg:flex flex-col items-center justify-center cursor-pointer text-gray-600 hover:text-black transition"
+              className="group relative w-12 hidden md:flex flex-col items-center justify-center cursor-pointer text-gray-600 hover:text-black transition"
             >
               <IoMdHeartEmpty className="text-[18px] md:text-[20px]" />
               <span className="text-[11px] font-bold leading-none mt-1">
@@ -329,14 +290,60 @@ export const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* MOBILE SEARCH OVERLAY (ABSOLUTE, ANIMATED, NO SHIFT) */}
+
+        <div
+          className={`absolute left-0 right-0 top-full bg-white border-b z-30
+            transition-all duration-200 ease-out
+            ${
+              mobileSearchOpen
+                ? "opacity-100 translate-y-0 pointer-events-auto"
+                : "opacity-0 -translate-y-2 pointer-events-none"
+            }`}
+        >
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (!searchQuery.trim()) return;
+              router.push(`/search?q=${encodeURIComponent(searchQuery)}`);
+              setMobileSearchOpen(false);
+            }}
+            className="flex items-center gap-2 px-4 py-3"
+          >
+            <div className="relative flex-1">
+              <GoSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-[16px]" />
+
+              <input
+                autoFocus
+                type="text"
+                placeholder={`Search ${placeholder}`}
+                className="w-full text-gray-800 border border-gray-200 rounded-full
+               pl-10 pr-4 py-2 text-sm outline-none"
+              />
+            </div>
+
+            <button
+              type="button"
+              onClick={() => {
+                setMobileSearchOpen(false);
+
+                setSearchQuery("");
+              }}
+              className="text-gray-500 hover:text-black transition text-[18px]"
+              aria-label="Close search"
+            >
+              ✕
+            </button>
+          </form>
+        </div>
+
+        {/* MOBILE MEN / WOMEN */}
+
         <div className="grid grid-cols-2 text-lg md:hidden border-t bg-white">
           <Link
             href="/men"
-            className={`flex justify-center cursor-pointer p-3 font-medium transition ${
-              isActive("/men")
-                ? "bg-linear-to-r from-black to-gray-700 text-white shadow-inner"
-                : "text-gray-700 hover:bg-linear-to-r hover:from-gray-100 hover:to-gray-300 active:scale-95"
+            className={`flex justify-center p-3 font-medium ${
+              isActive("/men") ? "bg-black text-white" : "text-gray-700"
             }`}
           >
             MEN
@@ -344,16 +351,16 @@ export const Navbar = () => {
 
           <Link
             href="/women"
-            className={`flex justify-center cursor-pointer p-3 font-medium transition ${
-              isActive("/women")
-                ? "bg-linear-to-r from-black to-gray-700 text-white shadow-inner"
-                : "text-gray-700 hover:bg-linear-to-r hover:from-gray-100 hover:to-gray-300 active:scale-95"
+            className={`flex justify-center p-3 font-medium ${
+              isActive("/women") ? "bg-black text-white" : "text-gray-700"
             }`}
           >
             WOMEN
           </Link>
         </div>
       </nav>
+
+      {showAuth && <AuthModal onClose={() => setShowAuth(false)} />}
     </div>
   );
 };
