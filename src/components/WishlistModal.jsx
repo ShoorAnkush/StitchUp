@@ -48,7 +48,7 @@ export const WishlistModal = ({ onClose, product }) => {
         aria-modal="true"
         onClick={(e) => e.stopPropagation()}
         className="
-          backdrop-blur-sm bg-white/10 border border-white/20 rounded-2xl shadow-2xl w-full max-w-sm p-8 relative flex flex-col justify-center text-white"
+          backdrop-blur-sm bg-white/10 border m-4 md:m-0 border-white/20 rounded-2xl shadow-2xl w-full max-w-sm p-8 relative flex flex-col justify-center text-white"
       >
         {/* Close */}
         <button

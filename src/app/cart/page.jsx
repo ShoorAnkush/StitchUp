@@ -10,10 +10,13 @@ import { RxCrossCircled } from "react-icons/rx";
 import { useCart } from "@/context/CartContext";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { useWishlist } from "@/context/WishlistContext";
+import { useAuth } from "@/context/AuthContext";
 
 export default function CartPage({ product }) {
   const { cartItems = [], removeFromCart, updateQuantity } = useCart();
+  const { user, setShowAuth } = useAuth();
   const { toggleWishlistButton, isInWishlist } = useWishlist();
+
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
 
@@ -61,6 +64,11 @@ export default function CartPage({ product }) {
     );
 
   const handleCheckout = async () => {
+    if (!user) {
+      setShowAuth(true);
+      return;
+    }
+
     const res = await fetch("/api/checkout", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -246,12 +254,12 @@ export default function CartPage({ product }) {
                   }
                   disabled={alreadyInWishlist}
                   className={`p-2 rounded transition
-    ${
-      alreadyInWishlist
-        ? "cursor-not-allowed opacity-50"
-        : "hover:bg-gray-200 cursor-pointer"
-    }
-  `}
+                      ${
+                        alreadyInWishlist
+                          ? "cursor-not-allowed opacity-50"
+                          : "hover:bg-gray-200 cursor-pointer"
+                      }
+                    `}
                   aria-label="Move item to wishlist"
                 >
                   {alreadyInWishlist ? (
@@ -289,8 +297,11 @@ export default function CartPage({ product }) {
             <p className="text-sm font-semibold text-gray-700 uppercase">
               Delivery Address
             </p>
-            <button className="text-gray-900 text-base font-medium underline cursor-pointer">
-              Change
+            <button
+              disabled
+              className="text-gray-900 text-sm font-medium underline"
+            >
+              Change (checkout)
             </button>
           </div>
 
@@ -305,7 +316,6 @@ export default function CartPage({ product }) {
             Payment Method
           </p>
           <select className="w-full border border-gray-300 bg-gray-50 px-3 py-2 rounded-md text-sm focus:ring-2 focus:ring-gray-400 focus:outline-none">
-            <option value="COD">Cash On Delivery</option>
             <option value="Online">Online Payment</option>
           </select>
         </div>

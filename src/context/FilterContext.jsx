@@ -10,7 +10,7 @@ export const FilterProvider = ({ children }) => {
   const router = useRouter();
   const pathname = usePathname();
 
-  // 🔹 URL is the source of truth
+  // URL is the source of truth
   const filters = useMemo(() => {
     return {
       categories: searchParams.get("categories")?.split(",") || [],
@@ -23,7 +23,7 @@ export const FilterProvider = ({ children }) => {
     };
   }, [searchParams]);
 
-  // 🔹 Update URL
+  // Update URL
   const updateParams = (updates) => {
     const params = new URLSearchParams(searchParams.toString());
 
@@ -47,7 +47,7 @@ export const FilterProvider = ({ children }) => {
     });
   };
 
-  // 🔹 Actions
+  //  Actions
   const toggleCategory = (category) => {
     const next = filters.categories.includes(category)
       ? filters.categories.filter((c) => c !== category)

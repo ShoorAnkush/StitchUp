@@ -140,7 +140,7 @@ export const Navbar = () => {
                   autoFocus
                   type="text"
                   placeholder={`Search ${placeholder}`}
-                  className="w-32 outline-none text-[16px] bg-transparent"
+                  className="flex-1 outline-none text-[16px] bg-transparent"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
@@ -155,7 +155,7 @@ export const Navbar = () => {
                     setMobileSearchOpen(false);
                     setSearchQuery("");
                   }}
-                  className="text-gray-500 hover:text-black transition text-base"
+                  className="text-gray-500 hover:text-black text-[18px] transition text-base"
                   aria-label="Close search"
                 >
                   ✕
@@ -175,7 +175,7 @@ export const Navbar = () => {
                     alt={user.displayName || "User avatar"}
                     width={40}
                     height={40}
-                    className="w-7 h-7 md:w-8 md:h-8 rounded-full cursor-pointer
+                    className="w-8 h-8 rounded-full cursor-pointer
                    hover:ring-2 hover:ring-blue-400 transition"
                   />
                 ) : (

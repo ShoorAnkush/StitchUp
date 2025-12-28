@@ -9,7 +9,7 @@ import { useAuth } from "@/context/AuthContext";
 export const SideMenuContent = ({ setIsOpen }) => {
   const [selectedGender, setSelectedGender] = useState("men");
   const [isFading, setIsFading] = useState(false);
-  const { showAuth, setShowAuth } = useAuth();
+  const { user, showAuth, setShowAuth } = useAuth();
 
   const groupedProducts = useMemo(() => {
     const grouped = {};
@@ -40,17 +40,23 @@ export const SideMenuContent = ({ setIsOpen }) => {
       {/* Header Section */}
       <div className="sticky top-0 z-20 bg-white">
         <div className="flex justify-center py-3">
-          <button
-            onClick={() => {
-              setShowAuth(true);
-              setIsOpen(false);
-            }}
-            type="button"
-            className="bg-white text-gray-600 text-sm flex items-center px-4 py-2 gap-2 rounded-lg border border-gray-300 shadow-sm hover:bg-gray-50 hover:shadow transition-all duration-200 cursor-pointer"
-          >
-            <CgProfile className="text-lg" />
-            Login / Sign Up
-          </button>
+          {user ? (
+            <p className="text-lg font-semibold truncate">
+              {user.displayName || user.email}
+            </p>
+          ) : (
+            <button
+              onClick={() => {
+                setShowAuth(true);
+                setIsOpen(false);
+              }}
+              type="button"
+              className="bg-white text-gray-600 text-sm flex items-center px-4 py-2 gap-2 rounded-lg border border-gray-300 shadow-sm hover:bg-gray-50 hover:shadow transition-all duration-200 cursor-pointer"
+            >
+              <CgProfile className="text-lg" />
+              Login / Sign Up
+            </button>
+          )}
         </div>
 
         {/* Gender Toggle */}
@@ -110,7 +116,7 @@ export const SideMenuContent = ({ setIsOpen }) => {
         </div>
 
         {/* Bottom Fade Gradient */}
-        <div className="absolute bottom-0 left-0 w-full h-10 bg-linear-to-t from-white pointer-events-none"></div>
+        {/* <div className="absolute bottom-0 left-0 w-full h-10 bg-linear-to-t from-white pointer-events-none"></div> */}
       </div>
     </div>
   );

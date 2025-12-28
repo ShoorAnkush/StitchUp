@@ -189,6 +189,7 @@ export function CartProvider({ children }) {
       (item) => !(item.id === id && item.size === size && item.color === color)
     );
     void saveCart(updatedCart);
+    toast.success("Removed from Cart");
   };
 
   const updateQuantity = (id, size, color, quantity) => {
