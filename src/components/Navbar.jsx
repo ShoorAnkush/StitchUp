@@ -76,18 +76,15 @@ export const Navbar = () => {
 
           {/* LOGO */}
 
-          <div className="absolute top-1/2 left-1/3 sm:left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <Link href="/">
-              <div className="h-8 md:h-10 w-auto">
-                <Image
-                  src="/images/logo1.png"
-                  alt="StitchUp Logo"
-                  width={500}
-                  height={500}
-                  className="w-full h-full"
-                />
-              </div>
-            </Link>
+          <div className="h-8 md:h-10">
+            <Image
+              src="/images/logo1.png"
+              alt="StitchUp Logo"
+              width={500}
+              height={500}
+              className="h-full w-auto object-contain"
+              priority
+            />
           </div>
 
           {/* Right Icons */}
